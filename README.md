@@ -1,21 +1,23 @@
 # ShopFlow
 
-ShopFlow is a Django REST Framework backend for managing products, stores, inventory, and orders.
+ShopFlow is a Django REST Framework backend application for managing products, stores, inventory, and orders.
 
-The project demonstrates REST API development, PostgreSQL database management, Redis caching, Celery asynchronous processing, Docker containerization, seed data, and automated testing.
+The project demonstrates REST API development, PostgreSQL database management, Redis caching, Celery asynchronous processing, Docker containerization, database transactions, API documentation, seed data, and automated testing.
 
 ---
 
 ## Tech Stack
 
 - Python 3.10
-- Django
+- Django 5.2
 - Django REST Framework
-- PostgreSQL
-- Redis
-- Celery
+- PostgreSQL 16
+- Redis 7
+- Celery 5.6
 - Docker
 - Docker Compose
+- drf-spectacular / OpenAPI
+- Postman
 
 ---
 
@@ -23,16 +25,22 @@ The project demonstrates REST API development, PostgreSQL database management, R
 
 - Product management
 - Store management
-- Inventory management
+- Store inventory management
 - Order creation
-- Automatic inventory deduction during order creation
-- Database transactions for order and inventory consistency
+- Order listing
+- Product search
+- Product autocomplete
+- Database transactions using `transaction.atomic()`
+- Inventory validation before order confirmation
+- Automatic inventory deduction for confirmed orders
+- Rejected orders when stock is insufficient
 - Redis caching for inventory listing
-- Redis cache invalidation after inventory updates
-- Celery asynchronous order confirmation task
+- Redis cache invalidation after inventory changes
+- Celery asynchronous order confirmation processing
 - PostgreSQL database
 - Seed data management command
-- REST APIs
+- Swagger / OpenAPI documentation
+- Postman API collection
 - Automated tests
 - Dockerized development environment
 
@@ -75,33 +83,79 @@ shopflow/
 │   ├── tasks.py
 │   └── tests.py
 │
+├── postman/
+│   └── ShopFlow.postman_collection.json
+│
 ├── manage.py
 ├── requirements.txt
 ├── Dockerfile
 ├── docker-compose.yml
 ├── .gitignore
 └── README.md
-Local Setup
-1. Clone the Repository
+```
+
+---
+
+# Setup Instructions
+
+## Prerequisites
+
+Make sure the following are installed:
+
+- Python 3.10+
+- Docker
+- Docker Compose
+- Git
+- Postman (optional, for API testing)
+
+---
+
+## 1. Clone the Repository
+
+```bash
 git clone <YOUR_GITHUB_REPOSITORY_URL>
 cd shopflow
-2. Create Virtual Environment
+```
+
+---
+
+## 2. Local Virtual Environment
+
+Create a virtual environment:
+
+```bash
 python3 -m venv venv
+```
 
-Activate it:
+Activate it on macOS/Linux:
 
-macOS / Linux
+```bash
 source venv/bin/activate
-Windows
-venv\Scripts\activate
-3. Install Dependencies
-pip install -r requirements.txt
-Environment Variables
+```
 
-Create a .env file in the project root.
+On Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+---
+
+## 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# Environment Variables
+
+Create a `.env` file in the project root.
 
 Example:
 
+```env
 DEBUG=True
 
 POSTGRES_DB=shopflow
@@ -114,116 +168,382 @@ REDIS_URL=redis://redis:6379/1
 
 CELERY_BROKER_URL=redis://redis:6379/2
 CELERY_RESULT_BACKEND=redis://redis:6379/2
+```
 
-Do not commit .env to GitHub.
+Do not commit `.env` to GitHub.
 
-Docker Setup
+The `.env` file should be included in `.gitignore`.
 
-The project uses Docker Compose to run Django, PostgreSQL, Redis, and Celery.
+---
 
-Build Containers
+# Docker Usage
+
+The project uses Docker Compose to run the application services.
+
+The Docker environment consists of:
+
+```text
+Django
+   |
+   +---- PostgreSQL
+   |
+   +---- Redis
+   |
+   +---- Celery Worker
+```
+
+---
+
+## Build Docker Images
+
+```bash
 docker compose build
-Start All Services
+```
+
+---
+
+## Start the Application
+
+```bash
 docker compose up
+```
 
-The following services are started:
+This starts:
 
-Django       → 8001
-PostgreSQL   → 5432
-Redis        → 6379
-Celery       → Worker
+| Service | Purpose |
+|---|---|
+| `web` | Django application |
+| `db` | PostgreSQL database |
+| `redis` | Redis cache and Celery broker |
+| `celery` | Celery background worker |
 
-Django is available at:
+Django runs on:
 
+```text
 http://127.0.0.1:8001/
-Run Migrations
+```
+
+---
+
+## Run Migrations
 
 After starting Docker:
 
+```bash
 docker compose exec web python manage.py migrate
-Stop Services
-docker compose down
-Seed Data
+```
 
-The project includes a Django management command to populate the database with sample data.
+---
+
+## Create Seed Data
+
+The project provides a management command for generating sample data.
 
 Run:
 
+```bash
 docker compose exec web python manage.py seed_data
+```
 
 This creates sample:
 
-Products
-Stores
-Inventory
-Related application data
-API Endpoints
-Products
-List Products
-GET /products/
+- Products
+- Stores
+- Inventory
+- Related application data
 
-Example:
+---
 
-curl http://127.0.0.1:8001/products/
-Stores
-List Stores
-GET /stores/
+## Run Tests
 
-Example:
+Run the complete test suite:
 
-curl http://127.0.0.1:8001/stores/
-Inventory
-List Store Inventory
-GET /stores/<store_id>/inventory/
+```bash
+docker compose exec web python manage.py test
+```
 
-Example:
+The project contains tests covering core API and business functionality including:
 
-curl http://127.0.0.1:8001/stores/2/inventory/
+- Product APIs
+- Store APIs
+- Inventory behavior
+- Order creation
+- Order validation
+- Inventory updates
 
-The inventory listing endpoint uses Redis caching.
+---
 
-Order API
-Create Order
+## Stop Docker Services
+
+```bash
+docker compose down
+```
+
+To stop the services and remove the containers while keeping the PostgreSQL volume:
+
+```bash
+docker compose down
+```
+
+---
+
+# API Documentation
+
+## Swagger UI
+
+Swagger / OpenAPI documentation is integrated using `drf-spectacular`.
+
+Open:
+
+```text
+http://127.0.0.1:8001/api/docs/
+```
+
+Swagger UI allows the APIs to be viewed and tested directly from the browser.
+
+---
+
+## OpenAPI Schema
+
+The OpenAPI schema is available at:
+
+```text
+http://127.0.0.1:8001/api/schema/
+```
+
+---
+
+# API Endpoints
+
+## 1. Order Creation
+
+### Endpoint
+
+```http
 POST /orders/
-Content-Type: application/json
+```
 
-Example request:
+Creates an order for a store.
 
+The API validates inventory availability before confirming the order.
+
+### Request
+
+```json
 {
-    "store": 2,
+    "store_id": 1,
     "items": [
         {
-            "product": 1,
-            "quantity": 2
+            "product_id": 1,
+            "quantity_requested": 2
+        },
+        {
+            "product_id": 2,
+            "quantity_requested": 1
         }
     ]
 }
+```
 
-Example using curl:
+### cURL
 
+```bash
 curl -X POST http://127.0.0.1:8001/orders/ \
   -H "Content-Type: application/json" \
   -d '{
-        "store": 2,
-        "items": [
-            {
-                "product": 1,
-                "quantity": 2
-            }
-        ]
-      }'
-Redis Caching
+    "store_id": 1,
+    "items": [
+      {
+        "product_id": 1,
+        "quantity_requested": 2
+      }
+    ]
+  }'
+```
 
-Redis is used to cache the store inventory listing API.
+### Order Behavior
 
-Cache Flow
+If all requested products have sufficient stock:
+
+```text
+Order → CONFIRMED
+Inventory → Deducted
+```
+
+If any product has insufficient stock:
+
+```text
+Order → REJECTED
+Inventory → Not Deducted
+```
+
+The entire operation is wrapped in a database transaction using:
+
+```python
+transaction.atomic()
+```
+
+This ensures that order creation and inventory updates remain consistent.
+
+---
+
+# 2. Order Listing
+
+### Endpoint
+
+```http
+GET /stores/<store_id>/orders/
+```
+
+Returns all orders belonging to a store.
+
+Example:
+
+```bash
+curl http://127.0.0.1:8001/stores/1/orders/
+```
+
+The response includes:
+
+- Order ID
+- Order status
+- Created timestamp
+- Total number of items
+
+Orders are sorted by newest first.
+
+The implementation uses optimized database queries to avoid N+1 query problems.
+
+---
+
+# 3. Inventory Listing
+
+### Endpoint
+
+```http
+GET /stores/<store_id>/inventory/
+```
+
+Returns inventory for a specific store.
+
+Example:
+
+```bash
+curl http://127.0.0.1:8001/stores/1/inventory/
+```
+
+The response contains:
+
+- Product title
+- Product price
+- Category name
+- Inventory quantity
+
+Results are sorted alphabetically by product title.
+
+---
+
+# 4. Product Search
+
+### Endpoint
+
+```http
+GET /api/search/products/
+```
+
+The search API supports keyword searching across:
+
+- Product title
+- Product description
+- Category name
+
+### Example
+
+```bash
+curl "http://127.0.0.1:8001/api/search/products/?q=phone"
+```
+
+### Optional Filters
+
+The API supports optional filters such as:
+
+```text
+category
+price range
+store_id
+in_stock
+```
+
+Example:
+
+```text
+/api/search/products/?q=phone&category=electronics&in_stock=true
+```
+
+### Sorting
+
+Products can be sorted using supported sorting options such as:
+
+```text
+price
+newest
+relevance
+```
+
+Example:
+
+```text
+/api/search/products/?q=phone&sort=price
+```
+
+The API also provides pagination metadata.
+
+When `store_id` is provided, the response includes the inventory quantity for that store.
+
+---
+
+# 5. Product Autocomplete
+
+### Endpoint
+
+```http
+GET /api/search/suggest/?q=xxx
+```
+
+The autocomplete API requires a minimum of 3 characters.
+
+Example:
+
+```bash
+curl "http://127.0.0.1:8001/api/search/suggest/?q=iph"
+```
+
+The API:
+
+- Requires at least 3 characters
+- Returns up to 10 product titles
+- Prioritizes prefix matches
+- Keeps the response lightweight
+- Uses efficient database filtering
+
+---
+
+# Redis Caching
+
+Redis is used for caching frequently accessed inventory data.
+
+The inventory listing API checks Redis before querying PostgreSQL.
+
+## Cache Flow
+
+```text
 Client
   |
   v
 Inventory API
   |
   v
-Check Redis Cache
+Check Redis
   |
   +---- Cache Hit ----> Return Cached Data
   |
@@ -237,201 +557,415 @@ Check Redis Cache
           |
           v
       Return Response
+```
 
-Caching reduces repeated database queries for frequently requested inventory data.
+Caching reduces repeated database queries for frequently accessed inventory data.
 
-Cache Invalidation
+---
 
-When an order is created, inventory quantities are updated.
+## Cache Invalidation
 
-The corresponding inventory cache is invalidated after the inventory update.
+Inventory can change when an order is created.
 
-Order Creation
-      |
-      v
-Inventory Update
-      |
-      v
-Cache Invalidation
-      |
-      v
+Therefore, the corresponding inventory cache is invalidated after inventory changes.
+
+```text
+Order Created
+     |
+     v
+Inventory Updated
+     |
+     v
+Redis Cache Invalidated
+     |
+     v
 Next Inventory Request
-      |
-      v
-Fresh Data from Database
+     |
+     v
+Fresh Data from PostgreSQL
+```
 
-This prevents stale inventory data from being returned.
+This prevents stale inventory information from being returned.
 
-Celery Asynchronous Processing
+---
+
+# Celery Asynchronous Processing
 
 Celery is used for asynchronous order confirmation processing.
 
 Redis acts as the Celery message broker and result backend.
 
-Celery Flow
+## Async Flow
+
+```text
 Order Created
-      |
-      v
+     |
+     v
 Database Transaction
-      |
-      v
+     |
+     v
 Inventory Updated
-      |
-      v
+     |
+     v
 Celery Task Queued
-      |
-      v
+     |
+     v
 Redis Broker
-      |
-      v
+     |
+     v
 Celery Worker
-      |
-      v
-Order Confirmation
+     |
+     v
+Order Confirmation Processing
+```
 
 The Celery task is:
 
+```text
 orders.tasks.send_order_confirmation
+```
 
-The Celery worker is started automatically with Docker Compose:
+The Celery worker is started automatically by Docker Compose:
 
+```bash
 docker compose up
+```
 
-The worker should show:
+A successful worker startup should display:
 
+```text
 celery@... ready.
-Database Transactions
+```
 
-Order creation and inventory updates are handled using database transactions.
+This allows background processing to happen outside the main HTTP request-response cycle.
 
-This ensures that inventory is not partially updated if order creation fails.
+---
 
-The general flow is:
+# Database Transactions
 
+Order creation and inventory updates are handled using Django database transactions.
+
+The order creation flow is:
+
+```text
 Begin Transaction
-      |
-      v
-Validate Order
-      |
-      v
+       |
+       v
+Validate Products
+       |
+       v
 Check Inventory
-      |
-      v
+       |
+       v
 Create Order
-      |
-      v
+       |
+       v
 Update Inventory
-      |
-      v
+       |
+       v
 Commit Transaction
+```
 
-If an error occurs, the transaction is rolled back.
+If any validation or database operation fails, the transaction is rolled back.
 
-Testing
+This ensures:
 
-Run the complete test suite using:
+- No partial inventory updates
+- No inconsistent orders
+- Stock remains accurate
+- Order creation remains atomic
 
+---
+
+# Testing
+
+Run all tests using:
+
+```bash
 docker compose exec web python manage.py test
+```
 
 The test suite covers core functionality such as:
 
-API endpoints
-Product/store functionality
-Inventory behavior
-Order creation
-Inventory updates
-Scalability Considerations
+- API endpoints
+- Product functionality
+- Store functionality
+- Inventory listing
+- Order creation
+- Successful orders
+- Rejected orders
+- Inventory updates
 
-The project is designed with scalability in mind.
+---
 
-Redis Caching
+# Postman Collection
 
-Frequently requested inventory data is cached in Redis to reduce database load.
+A Postman collection containing the implemented APIs and sample requests is included in:
 
-Database Transactions
+```text
+postman/ShopFlow.postman_collection.json
+```
 
-Transactions ensure consistency when orders and inventory are updated concurrently.
+The collection can be imported into Postman.
 
-Celery
+It includes requests for:
 
-Asynchronous tasks are moved outside the HTTP request-response cycle, allowing the API to respond without waiting for background operations.
+- Order creation
+- Store order listing
+- Store inventory listing
+- Product search
+- Product autocomplete
 
-PostgreSQL
+Base URL used by the collection:
 
-PostgreSQL provides reliable relational data storage and supports indexing and efficient querying as the dataset grows.
+```text
+http://localhost:8001
+```
 
-Independent Services
+Update the `store_id` and `product_id` variables according to the seed data in the database.
 
-Docker Compose separates:
+---
 
+# Scalability Considerations
+
+The application is designed with scalability and performance in mind.
+
+## Redis Caching
+
+Frequently requested inventory data is cached in Redis to reduce database queries and database load.
+
+---
+
+## Database Transactions
+
+`transaction.atomic()` ensures consistency when an order and its inventory changes are performed together.
+
+---
+
+## Efficient Queries
+
+Database relationships and query optimization are used to avoid N+1 query problems, particularly when retrieving:
+
+- Orders
+- Order items
+- Products
+- Categories
+- Store inventory
+
+---
+
+## Celery
+
+Long-running or asynchronous operations are handled by Celery workers instead of blocking the main Django request.
+
+Multiple Celery workers can be added as traffic increases.
+
+---
+
+## PostgreSQL
+
+PostgreSQL provides reliable relational storage and supports:
+
+- Indexing
+- Efficient filtering
+- Transactions
+- Concurrent database access
+- Read replicas for future scaling
+
+---
+
+## Independent Services
+
+Docker Compose separates the main components:
+
+```text
 Django
 PostgreSQL
 Redis
 Celery
+```
 
-This allows application components to be scaled independently.
+This architecture allows individual components to be scaled independently.
 
-Future Improvements
+For example:
 
-For a production-scale deployment, the architecture could be extended with:
+```text
+                 Load Balancer
+                      |
+          +-----------+-----------+
+          |           |           |
+       Django      Django      Django
+          |
+          v
+     PostgreSQL
 
-Multiple Django application instances
-Multiple Celery workers
-Load balancing
-Redis clustering
-PostgreSQL read replicas
-Database indexing optimization
-Monitoring and logging
-Message retry and dead-letter handling
-Horizontal scaling using Kubernetes
-Running the Complete Application
+          +
+        Redis
+          |
+          v
+    Celery Workers
+     /     |     \
+ Worker  Worker  Worker
+```
 
-The simplest way to run the complete application is:
+---
 
-docker compose build
-docker compose up
+# Future Improvements
 
-In another terminal:
+For a production-scale deployment, the system could be extended with:
 
-docker compose exec web python manage.py migrate
+- Multiple Django application instances
+- Load balancing
+- Multiple Celery workers
+- Redis clustering
+- PostgreSQL read replicas
+- Database indexing optimization
+- API rate limiting
+- Monitoring and centralized logging
+- Celery retry policies
+- Dead-letter queue handling
+- Container orchestration using Kubernetes
+- CI/CD pipeline
+- Production WSGI/ASGI server
 
-Then seed the database:
+---
 
-docker compose exec web python manage.py seed_data
+# Useful Docker Commands
 
-The application is now available at:
+Check running services:
 
-http://127.0.0.1:8001/
-Useful Docker Commands
-
-Check running containers:
-
+```bash
 docker compose ps
+```
 
 View Django logs:
 
+```bash
 docker compose logs web
+```
 
 View Celery logs:
 
+```bash
 docker compose logs celery
+```
 
 View Redis logs:
 
+```bash
 docker compose logs redis
+```
 
 View PostgreSQL logs:
 
+```bash
 docker compose logs db
+```
 
-Run Django shell:
+Open Django shell:
 
+```bash
 docker compose exec web python manage.py shell
+```
+
+Run migrations:
+
+```bash
+docker compose exec web python manage.py migrate
+```
+
+Run seed data:
+
+```bash
+docker compose exec web python manage.py seed_data
+```
 
 Run tests:
 
+```bash
 docker compose exec web python manage.py test
+```
 
-Stop containers:
+Stop all services:
 
+```bash
 docker compose down
+```
+
+---
+
+# Running the Complete Application
+
+The complete application can be started using:
+
+```bash
+docker compose build
+docker compose up -d
+```
+
+Apply migrations:
+
+```bash
+docker compose exec web python manage.py migrate
+```
+
+Load seed data:
+
+```bash
+docker compose exec web python manage.py seed_data
+```
+
+Check services:
+
+```bash
+docker compose ps
+```
+
+The application is available at:
+
+```text
+http://127.0.0.1:8001/
+```
+
+Swagger documentation:
+
+```text
+http://127.0.0.1:8001/api/docs/
+```
+
+OpenAPI schema:
+
+```text
+http://127.0.0.1:8001/api/schema/
+```
+
+---
+
+# Submission Checklist
+
+Before submitting the repository, verify that it contains:
+
+- [x] Complete Django project
+- [x] Models
+- [x] Serializers
+- [x] API views
+- [x] URLs
+- [x] Seed data command
+- [x] Redis caching
+- [x] Celery task integration
+- [x] Dockerfile
+- [x] Docker Compose configuration
+- [x] Automated tests
+- [x] Swagger / OpenAPI documentation
+- [x] Postman collection
+- [x] README with setup instructions
+- [x] Sample API requests
+- [x] Caching explanation
+- [x] Async/Celery explanation
+- [x] Scalability considerations
+
+---
+
+# Author
+
+Vaishnavi Uttarkar
