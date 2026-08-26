@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "stores.apps.StoresConfig",
     "orders",
     "search",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -167,3 +168,14 @@ CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 
 CELERY_RESULT_SERIALIZER = "json"
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "ShopFlow API",
+    "DESCRIPTION": "API documentation for ShopFlow",
+    "VERSION": "1.0.0",
+}

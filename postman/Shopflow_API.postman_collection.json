@@ -1,0 +1,513 @@
+{
+  "info": {
+    "_postman_id": "501d8910-03ca-4ddc-b4b4-d2778075ff16",
+    "name": "Shopflow API",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57736005",
+    "_collection_link": "https://go.postman.co/collection/57736005-501d8910-03ca-4ddc-b4b4-d2778075ff16?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Create Order",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "postman-echo.com/post",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "post"
+          ]
+        },
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+      },
+      "response": [
+        {
+          "name": "Create Order Response",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"store_id\": 1,\n    \"items\": [\n        {\n            \"product_id\": 210,\n            \"quantity_requested\": 2\n        }\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8001/orders/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8001",
+              "path": [
+                "orders",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 26 Aug 2026 14:06:44 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.10.21"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept, Cookie"
+            },
+            {
+              "key": "Allow",
+              "value": "POST, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "201"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 3,\n    \"store\": 1,\n    \"status\": \"CONFIRMED\",\n    \"created_at\": \"2026-08-26T14:06:43.844186Z\",\n    \"items\": [\n        {\n            \"product\": 210,\n            \"product_title\": \"Centralized well-modulated productivity Product 210\",\n            \"quantity_requested\": 2\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "List Store Orders",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "List Store Orders Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8001/stores/1/orders/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8001",
+              "path": [
+                "stores",
+                "1",
+                "orders",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 26 Aug 2026 14:07:30 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.10.21"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept, Cookie"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, HEAD, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "267"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 3,\n        \"status\": \"CONFIRMED\",\n        \"created_at\": \"2026-08-26T14:06:43.844186Z\",\n        \"total_items\": 1\n    },\n    {\n        \"id\": 2,\n        \"status\": \"CONFIRMED\",\n        \"created_at\": \"2026-08-26T13:35:44.674365Z\",\n        \"total_items\": 1\n    },\n    {\n        \"id\": 1,\n        \"status\": \"REJECTED\",\n        \"created_at\": \"2026-08-26T13:31:51.288148Z\",\n        \"total_items\": 1\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "List Store Inventory",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "List Store Inventory Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8001/stores/1/inventory/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8001",
+              "path": [
+                "stores",
+                "1",
+                "inventory",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 26 Aug 2026 14:08:41 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.10.21"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept, Cookie"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, HEAD, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "37594"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"product_title\": \"Adaptive attitude-oriented toolset Product 954\",\n        \"price\": \"3945.93\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 74\n    },\n    {\n        \"product_title\": \"Adaptive needs-based forecast Product 387\",\n        \"price\": \"3502.38\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 94\n    },\n    {\n        \"product_title\": \"Adaptive value-added productivity Product 6\",\n        \"price\": \"1427.72\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 91\n    },\n    {\n        \"product_title\": \"Advanced exuding system engine Product 412\",\n        \"price\": \"1659.31\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 70\n    },\n    {\n        \"product_title\": \"Advanced global implementation Product 694\",\n        \"price\": \"4591.50\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 18\n    },\n    {\n        \"product_title\": \"Advanced homogeneous service-desk Product 836\",\n        \"price\": \"9077.62\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 34\n    },\n    {\n        \"product_title\": \"Ameliorated actuating open system Product 354\",\n        \"price\": \"9268.04\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 81\n    },\n    {\n        \"product_title\": \"Ameliorated fresh-thinking info-mediaries Product 433\",\n        \"price\": \"3167.41\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 96\n    },\n    {\n        \"product_title\": \"Ameliorated fresh-thinking software Product 991\",\n        \"price\": \"6017.12\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 26\n    },\n    {\n        \"product_title\": \"Ameliorated full-range extranet Product 117\",\n        \"price\": \"4895.72\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 58\n    },\n    {\n        \"product_title\": \"Assimilated client-driven Internet solution Product 308\",\n        \"price\": \"2320.17\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 55\n    },\n    {\n        \"product_title\": \"Assimilated didactic strategy Product 265\",\n        \"price\": \"7508.17\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 41\n    },\n    {\n        \"product_title\": \"Assimilated dynamic leverage Product 350\",\n        \"price\": \"4826.10\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 53\n    },\n    {\n        \"product_title\": \"Assimilated full-range frame Product 762\",\n        \"price\": \"1054.60\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 48\n    },\n    {\n        \"product_title\": \"Assimilated leadingedge orchestration Product 690\",\n        \"price\": \"5395.62\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 94\n    },\n    {\n        \"product_title\": \"Assimilated needs-based flexibility Product 243\",\n        \"price\": \"9798.83\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 4\n    },\n    {\n        \"product_title\": \"Assimilated user-facing open architecture Product 355\",\n        \"price\": \"8046.08\",\n        \"category_name\": \"Automotive\",\n        \"quantity\": 68\n    },\n    {\n        \"product_title\": \"Automated asymmetric moratorium Product 673\",\n        \"price\": \"2028.58\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 66\n    },\n    {\n        \"product_title\": \"Automated dedicated info-mediaries Product 961\",\n        \"price\": \"1549.57\",\n        \"category_name\": \"Books\",\n        \"quantity\": 58\n    },\n    {\n        \"product_title\": \"Automated dedicated portal Product 669\",\n        \"price\": \"1697.79\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 88\n    },\n    {\n        \"product_title\": \"Balanced cohesive moratorium Product 919\",\n        \"price\": \"6918.91\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 9\n    },\n    {\n        \"product_title\": \"Balanced logistical contingency Product 844\",\n        \"price\": \"3660.37\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 79\n    },\n    {\n        \"product_title\": \"Balanced multimedia functionalities Product 799\",\n        \"price\": \"6372.35\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 51\n    },\n    {\n        \"product_title\": \"Balanced non-volatile strategy Product 532\",\n        \"price\": \"4851.82\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 14\n    },\n    {\n        \"product_title\": \"Business-focused fresh-thinking service-desk Product 734\",\n        \"price\": \"8592.72\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 81\n    },\n    {\n        \"product_title\": \"Business-focused stable encoding Product 705\",\n        \"price\": \"5758.25\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 8\n    },\n    {\n        \"product_title\": \"Centralized dynamic infrastructure Product 146\",\n        \"price\": \"4773.84\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 78\n    },\n    {\n        \"product_title\": \"Centralized well-modulated productivity Product 210\",\n        \"price\": \"5156.63\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 56\n    },\n    {\n        \"product_title\": \"Cloned 5thgeneration capacity Product 687\",\n        \"price\": \"2337.81\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 14\n    },\n    {\n        \"product_title\": \"Cloned contextually-based implementation Product 314\",\n        \"price\": \"4989.93\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 1\n    },\n    {\n        \"product_title\": \"Cloned system-worthy extranet Product 763\",\n        \"price\": \"2425.81\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 91\n    },\n    {\n        \"product_title\": \"Compatible interactive interface Product 808\",\n        \"price\": \"7349.21\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 37\n    },\n    {\n        \"product_title\": \"Compatible logistical toolset Product 316\",\n        \"price\": \"1223.18\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 39\n    },\n    {\n        \"product_title\": \"Configurable didactic intranet Product 97\",\n        \"price\": \"3120.78\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 96\n    },\n    {\n        \"product_title\": \"Configurable maximized parallelism Product 597\",\n        \"price\": \"4286.19\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 70\n    },\n    {\n        \"product_title\": \"Cross-group directional help-desk Product 144\",\n        \"price\": \"1904.03\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 99\n    },\n    {\n        \"product_title\": \"Cross-group interactive focus group Product 894\",\n        \"price\": \"4972.09\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 95\n    },\n    {\n        \"product_title\": \"Cross-group intermediate hub Product 902\",\n        \"price\": \"3599.48\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 62\n    },\n    {\n        \"product_title\": \"Cross-group maximized parallelism Product 7\",\n        \"price\": \"2641.94\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 72\n    },\n    {\n        \"product_title\": \"Cross-platform composite monitoring Product 85\",\n        \"price\": \"3933.18\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 44\n    },\n    {\n        \"product_title\": \"Customer-focused modular strategy Product 903\",\n        \"price\": \"3230.64\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 15\n    },\n    {\n        \"product_title\": \"Customer-focused national workforce Product 110\",\n        \"price\": \"4298.18\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 90\n    },\n    {\n        \"product_title\": \"Customizable eco-centric parallelism Product 742\",\n        \"price\": \"1461.54\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 41\n    },\n    {\n        \"product_title\": \"Customizable multi-tasking alliance Product 131\",\n        \"price\": \"3830.81\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 13\n    },\n    {\n        \"product_title\": \"Customizable scalable Graphical User Interface Product 485\",\n        \"price\": \"7106.50\",\n        \"category_name\": \"Books\",\n        \"quantity\": 77\n    },\n    {\n        \"product_title\": \"Decentralized 24hour function Product 363\",\n        \"price\": \"7705.32\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 62\n    },\n    {\n        \"product_title\": \"Decentralized incremental archive Product 13\",\n        \"price\": \"9185.24\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 50\n    },\n    {\n        \"product_title\": \"Decentralized multi-state complexity Product 722\",\n        \"price\": \"2244.75\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 71\n    },\n    {\n        \"product_title\": \"De-engineered reciprocal database Product 185\",\n        \"price\": \"4528.83\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 33\n    },\n    {\n        \"product_title\": \"Devolved didactic ability Product 275\",\n        \"price\": \"4400.33\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 31\n    },\n    {\n        \"product_title\": \"Devolved explicit alliance Product 747\",\n        \"price\": \"4121.74\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 68\n    },\n    {\n        \"product_title\": \"Devolved leadingedge projection Product 814\",\n        \"price\": \"4610.84\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 97\n    },\n    {\n        \"product_title\": \"Devolved logistical encryption Product 141\",\n        \"price\": \"1918.62\",\n        \"category_name\": \"Books\",\n        \"quantity\": 68\n    },\n    {\n        \"product_title\": \"Devolved scalable productivity Product 382\",\n        \"price\": \"7882.84\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 49\n    },\n    {\n        \"product_title\": \"Distributed analyzing initiative Product 245\",\n        \"price\": \"3561.11\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 60\n    },\n    {\n        \"product_title\": \"Distributed demand-driven challenge Product 434\",\n        \"price\": \"3284.63\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 47\n    },\n    {\n        \"product_title\": \"Distributed methodical contingency Product 548\",\n        \"price\": \"1090.67\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 84\n    },\n    {\n        \"product_title\": \"Diverse actuating strategy Product 656\",\n        \"price\": \"1639.21\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 19\n    },\n    {\n        \"product_title\": \"Diverse executive moderator Product 977\",\n        \"price\": \"9500.51\",\n        \"category_name\": \"Automotive\",\n        \"quantity\": 93\n    },\n    {\n        \"product_title\": \"Diverse non-volatile monitoring Product 566\",\n        \"price\": \"2193.36\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 87\n    },\n    {\n        \"product_title\": \"Down-sized mission-critical architecture Product 149\",\n        \"price\": \"2044.16\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 16\n    },\n    {\n        \"product_title\": \"Enhanced coherent initiative Product 913\",\n        \"price\": \"6720.55\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 19\n    },\n    {\n        \"product_title\": \"Enhanced directional intranet Product 287\",\n        \"price\": \"4623.66\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 69\n    },\n    {\n        \"product_title\": \"Enhanced multi-tasking capacity Product 30\",\n        \"price\": \"6349.23\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 43\n    },\n    {\n        \"product_title\": \"Enhanced real-time core Product 19\",\n        \"price\": \"3487.35\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 34\n    },\n    {\n        \"product_title\": \"Enhanced zero-defect alliance Product 901\",\n        \"price\": \"5035.27\",\n        \"category_name\": \"Books\",\n        \"quantity\": 10\n    },\n    {\n        \"product_title\": \"Enterprise-wide analyzing info-mediaries Product 920\",\n        \"price\": \"7727.94\",\n        \"category_name\": \"Books\",\n        \"quantity\": 20\n    },\n    {\n        \"product_title\": \"Enterprise-wide neutral infrastructure Product 541\",\n        \"price\": \"6533.49\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 10\n    },\n    {\n        \"product_title\": \"Ergonomic discrete initiative Product 779\",\n        \"price\": \"1928.54\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 40\n    },\n    {\n        \"product_title\": \"Ergonomic grid-enabled core Product 47\",\n        \"price\": \"6948.51\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 6\n    },\n    {\n        \"product_title\": \"Ergonomic leadingedge throughput Product 899\",\n        \"price\": \"8086.45\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 59\n    },\n    {\n        \"product_title\": \"Ergonomic upward-trending application Product 840\",\n        \"price\": \"7785.98\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 78\n    },\n    {\n        \"product_title\": \"Exclusive bifurcated complexity Product 885\",\n        \"price\": \"5775.10\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 42\n    },\n    {\n        \"product_title\": \"Exclusive even-keeled emulation Product 294\",\n        \"price\": \"7427.30\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 43\n    },\n    {\n        \"product_title\": \"Exclusive tertiary solution Product 596\",\n        \"price\": \"4586.06\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 50\n    },\n    {\n        \"product_title\": \"Expanded high-level open architecture Product 852\",\n        \"price\": \"2957.03\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 10\n    },\n    {\n        \"product_title\": \"Expanded responsive ability Product 89\",\n        \"price\": \"1693.93\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 36\n    },\n    {\n        \"product_title\": \"Extended actuating collaboration Product 76\",\n        \"price\": \"3031.90\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 99\n    },\n    {\n        \"product_title\": \"Extended even-keeled structure Product 454\",\n        \"price\": \"7352.93\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 57\n    },\n    {\n        \"product_title\": \"Extended motivating Internet solution Product 627\",\n        \"price\": \"6290.91\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 20\n    },\n    {\n        \"product_title\": \"Face-to-face dedicated capacity Product 333\",\n        \"price\": \"9860.02\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 48\n    },\n    {\n        \"product_title\": \"Face-to-face disintermediate knowledgebase Product 118\",\n        \"price\": \"6877.25\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 89\n    },\n    {\n        \"product_title\": \"Face-to-face zero administration time-frame Product 166\",\n        \"price\": \"3874.72\",\n        \"category_name\": \"Books\",\n        \"quantity\": 85\n    },\n    {\n        \"product_title\": \"Focused disintermediate matrix Product 209\",\n        \"price\": \"8259.46\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 83\n    },\n    {\n        \"product_title\": \"Focused encompassing website Product 556\",\n        \"price\": \"9439.33\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 63\n    },\n    {\n        \"product_title\": \"Focused fault-tolerant adapter Product 767\",\n        \"price\": \"4191.40\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 34\n    },\n    {\n        \"product_title\": \"Focused multi-state process improvement Product 487\",\n        \"price\": \"5180.25\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 63\n    },\n    {\n        \"product_title\": \"Focused non-volatile protocol Product 725\",\n        \"price\": \"8878.91\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 98\n    },\n    {\n        \"product_title\": \"Focused scalable methodology Product 938\",\n        \"price\": \"3936.51\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 90\n    },\n    {\n        \"product_title\": \"Focused zero administration utilization Product 479\",\n        \"price\": \"1751.20\",\n        \"category_name\": \"Automotive\",\n        \"quantity\": 22\n    },\n    {\n        \"product_title\": \"Front-line analyzing groupware Product 107\",\n        \"price\": \"5847.72\",\n        \"category_name\": \"Books\",\n        \"quantity\": 2\n    },\n    {\n        \"product_title\": \"Front-line contextually-based challenge Product 101\",\n        \"price\": \"4627.26\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 21\n    },\n    {\n        \"product_title\": \"Front-line discrete pricing structure Product 140\",\n        \"price\": \"7817.39\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 81\n    },\n    {\n        \"product_title\": \"Fully-configurable 6thgeneration neural-net Product 765\",\n        \"price\": \"3148.73\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 54\n    },\n    {\n        \"product_title\": \"Fully-configurable foreground secured line Product 997\",\n        \"price\": \"1045.61\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 82\n    },\n    {\n        \"product_title\": \"Fully-configurable methodical focus group Product 770\",\n        \"price\": \"4252.21\",\n        \"category_name\": \"Books\",\n        \"quantity\": 80\n    },\n    {\n        \"product_title\": \"Function-based 5thgeneration firmware Product 641\",\n        \"price\": \"4475.01\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 69\n    },\n    {\n        \"product_title\": \"Function-based responsive flexibility Product 607\",\n        \"price\": \"9704.78\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 72\n    },\n    {\n        \"product_title\": \"Fundamental bandwidth-monitored hardware Product 267\",\n        \"price\": \"2575.73\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 70\n    },\n    {\n        \"product_title\": \"Fundamental contextually-based functionalities Product 37\",\n        \"price\": \"2704.83\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 16\n    },\n    {\n        \"product_title\": \"Fundamental holistic initiative Product 559\",\n        \"price\": \"6504.71\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 6\n    },\n    {\n        \"product_title\": \"Fundamental user-facing matrix Product 609\",\n        \"price\": \"2373.67\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 3\n    },\n    {\n        \"product_title\": \"Future-proofed bandwidth-monitored support Product 370\",\n        \"price\": \"4985.88\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 18\n    },\n    {\n        \"product_title\": \"Future-proofed client-driven Graphical User Interface Product 554\",\n        \"price\": \"3525.48\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 72\n    },\n    {\n        \"product_title\": \"Future-proofed fault-tolerant approach Product 154\",\n        \"price\": \"9033.83\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 96\n    },\n    {\n        \"product_title\": \"Future-proofed systematic model Product 171\",\n        \"price\": \"4697.14\",\n        \"category_name\": \"Books\",\n        \"quantity\": 50\n    },\n    {\n        \"product_title\": \"Future-proofed zero-defect system engine Product 864\",\n        \"price\": \"5768.19\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 96\n    },\n    {\n        \"product_title\": \"Grass-roots 3rdgeneration groupware Product 302\",\n        \"price\": \"7344.19\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 29\n    },\n    {\n        \"product_title\": \"Grass-roots national hierarchy Product 563\",\n        \"price\": \"1680.00\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 75\n    },\n    {\n        \"product_title\": \"Grass-roots radical support Product 443\",\n        \"price\": \"7763.79\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 96\n    },\n    {\n        \"product_title\": \"Grass-roots well-modulated approach Product 50\",\n        \"price\": \"8920.41\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 61\n    },\n    {\n        \"product_title\": \"Horizontal actuating groupware Product 670\",\n        \"price\": \"9864.66\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 77\n    },\n    {\n        \"product_title\": \"Implemented 24/7 knowledgebase Product 642\",\n        \"price\": \"3503.15\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 29\n    },\n    {\n        \"product_title\": \"Implemented asymmetric capacity Product 282\",\n        \"price\": \"3388.86\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 71\n    },\n    {\n        \"product_title\": \"Implemented foreground Graphic Interface Product 744\",\n        \"price\": \"9132.11\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 15\n    },\n    {\n        \"product_title\": \"Implemented mission-critical functionalities Product 463\",\n        \"price\": \"1143.12\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 99\n    },\n    {\n        \"product_title\": \"Implemented needs-based Graphical User Interface Product 803\",\n        \"price\": \"8544.71\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 69\n    },\n    {\n        \"product_title\": \"Implemented real-time superstructure Product 389\",\n        \"price\": \"5875.19\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 73\n    },\n    {\n        \"product_title\": \"Implemented transitional emulation Product 526\",\n        \"price\": \"5508.05\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 74\n    },\n    {\n        \"product_title\": \"Implemented value-added collaboration Product 317\",\n        \"price\": \"7240.64\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 64\n    },\n    {\n        \"product_title\": \"Innovative cohesive frame Product 753\",\n        \"price\": \"5368.81\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 55\n    },\n    {\n        \"product_title\": \"Innovative dedicated hub Product 713\",\n        \"price\": \"6783.27\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 42\n    },\n    {\n        \"product_title\": \"Innovative dedicated methodology Product 208\",\n        \"price\": \"8689.72\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 49\n    },\n    {\n        \"product_title\": \"Innovative holistic flexibility Product 969\",\n        \"price\": \"2026.42\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 29\n    },\n    {\n        \"product_title\": \"Innovative incremental time-frame Product 743\",\n        \"price\": \"6952.64\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 67\n    },\n    {\n        \"product_title\": \"Integrated client-driven Internet solution Product 818\",\n        \"price\": \"6445.57\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 27\n    },\n    {\n        \"product_title\": \"Integrated content-based project Product 976\",\n        \"price\": \"4071.92\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 47\n    },\n    {\n        \"product_title\": \"Integrated context-sensitive architecture Product 234\",\n        \"price\": \"6643.43\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 18\n    },\n    {\n        \"product_title\": \"Integrated demand-driven artificial intelligence Product 895\",\n        \"price\": \"5066.61\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 51\n    },\n    {\n        \"product_title\": \"Integrated discrete artificial intelligence Product 421\",\n        \"price\": \"1766.47\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 59\n    },\n    {\n        \"product_title\": \"Integrated maximized challenge Product 278\",\n        \"price\": \"1901.01\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 29\n    },\n    {\n        \"product_title\": \"Integrated object-oriented adapter Product 790\",\n        \"price\": \"6003.75\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 22\n    },\n    {\n        \"product_title\": \"Integrated object-oriented analyzer Product 517\",\n        \"price\": \"4149.54\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 19\n    },\n    {\n        \"product_title\": \"Intuitive analyzing approach Product 164\",\n        \"price\": \"7556.63\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 39\n    },\n    {\n        \"product_title\": \"Intuitive multimedia hub Product 451\",\n        \"price\": \"5459.84\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 55\n    },\n    {\n        \"product_title\": \"Intuitive multi-tasking Graphical User Interface Product 923\",\n        \"price\": \"1762.55\",\n        \"category_name\": \"Automotive\",\n        \"quantity\": 1\n    },\n    {\n        \"product_title\": \"Intuitive responsive hardware Product 816\",\n        \"price\": \"8538.18\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 2\n    },\n    {\n        \"product_title\": \"Intuitive solution-oriented encoding Product 585\",\n        \"price\": \"6832.96\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 12\n    },\n    {\n        \"product_title\": \"Inverse 24/7 focus group Product 447\",\n        \"price\": \"9091.37\",\n        \"category_name\": \"Books\",\n        \"quantity\": 94\n    },\n    {\n        \"product_title\": \"Inverse tangible hardware Product 57\",\n        \"price\": \"8517.43\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 7\n    },\n    {\n        \"product_title\": \"Inverse tertiary core Product 590\",\n        \"price\": \"7897.59\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 54\n    },\n    {\n        \"product_title\": \"Managed grid-enabled matrices Product 984\",\n        \"price\": \"3174.33\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 67\n    },\n    {\n        \"product_title\": \"Managed incremental methodology Product 272\",\n        \"price\": \"3144.69\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 46\n    },\n    {\n        \"product_title\": \"Mandatory eco-centric strategy Product 867\",\n        \"price\": \"2686.72\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 74\n    },\n    {\n        \"product_title\": \"Monitored optimizing migration Product 587\",\n        \"price\": \"6784.25\",\n        \"category_name\": \"Books\",\n        \"quantity\": 98\n    },\n    {\n        \"product_title\": \"Monitored tangible functionalities Product 65\",\n        \"price\": \"7970.38\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 55\n    },\n    {\n        \"product_title\": \"Multi-channeled 24hour alliance Product 12\",\n        \"price\": \"2491.83\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 17\n    },\n    {\n        \"product_title\": \"Multi-channeled dynamic projection Product 958\",\n        \"price\": \"3208.72\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 2\n    },\n    {\n        \"product_title\": \"Multi-channeled static parallelism Product 418\",\n        \"price\": \"4914.52\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 13\n    },\n    {\n        \"product_title\": \"Multi-lateral human-resource orchestration Product 631\",\n        \"price\": \"4028.90\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 36\n    },\n    {\n        \"product_title\": \"Multi-lateral incremental paradigm Product 260\",\n        \"price\": \"5244.45\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 84\n    },\n    {\n        \"product_title\": \"Multi-lateral intermediate toolset Product 64\",\n        \"price\": \"5534.49\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 17\n    },\n    {\n        \"product_title\": \"Multi-lateral static model Product 994\",\n        \"price\": \"1563.53\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 12\n    },\n    {\n        \"product_title\": \"Multi-lateral value-added function Product 257\",\n        \"price\": \"5101.91\",\n        \"category_name\": \"Books\",\n        \"quantity\": 2\n    },\n    {\n        \"product_title\": \"Multi-layered 6thgeneration customer loyalty Product 711\",\n        \"price\": \"1288.95\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 34\n    },\n    {\n        \"product_title\": \"Multi-layered clear-thinking analyzer Product 4\",\n        \"price\": \"1042.93\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 27\n    },\n    {\n        \"product_title\": \"Multi-layered even-keeled monitoring Product 340\",\n        \"price\": \"2072.81\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 36\n    },\n    {\n        \"product_title\": \"Multi-layered local policy Product 501\",\n        \"price\": \"7283.18\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 74\n    },\n    {\n        \"product_title\": \"Multi-layered needs-based encoding Product 680\",\n        \"price\": \"3551.99\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 26\n    },\n    {\n        \"product_title\": \"Multi-tiered 6thgeneration data-warehouse Product 21\",\n        \"price\": \"2118.17\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 33\n    },\n    {\n        \"product_title\": \"Multi-tiered analyzing productivity Product 96\",\n        \"price\": \"5239.40\",\n        \"category_name\": \"Books\",\n        \"quantity\": 18\n    },\n    {\n        \"product_title\": \"Networked bandwidth-monitored array Product 43\",\n        \"price\": \"2344.14\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 51\n    },\n    {\n        \"product_title\": \"Networked explicit hierarchy Product 613\",\n        \"price\": \"1153.98\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 24\n    },\n    {\n        \"product_title\": \"Object-based interactive time-frame Product 201\",\n        \"price\": \"6152.10\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 81\n    },\n    {\n        \"product_title\": \"Open-architected holistic policy Product 430\",\n        \"price\": \"7103.13\",\n        \"category_name\": \"Books\",\n        \"quantity\": 89\n    },\n    {\n        \"product_title\": \"Open-architected upward-trending matrices Product 448\",\n        \"price\": \"7706.87\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 36\n    },\n    {\n        \"product_title\": \"Open-source homogeneous policy Product 703\",\n        \"price\": \"1149.51\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 58\n    },\n    {\n        \"product_title\": \"Open-source maximized frame Product 62\",\n        \"price\": \"8597.55\",\n        \"category_name\": \"Automotive\",\n        \"quantity\": 3\n    },\n    {\n        \"product_title\": \"Open-source multi-state initiative Product 86\",\n        \"price\": \"3114.09\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 36\n    },\n    {\n        \"product_title\": \"Operative asymmetric challenge Product 217\",\n        \"price\": \"7919.84\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 47\n    },\n    {\n        \"product_title\": \"Operative homogeneous monitoring Product 72\",\n        \"price\": \"6085.45\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 27\n    },\n    {\n        \"product_title\": \"Optimized client-server encryption Product 261\",\n        \"price\": \"9378.83\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 23\n    },\n    {\n        \"product_title\": \"Optimized intermediate orchestration Product 851\",\n        \"price\": \"1548.59\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 42\n    },\n    {\n        \"product_title\": \"Optional high-level portal Product 134\",\n        \"price\": \"7926.72\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 18\n    },\n    {\n        \"product_title\": \"Organic 4thgeneration policy Product 129\",\n        \"price\": \"9485.73\",\n        \"category_name\": \"Automotive\",\n        \"quantity\": 26\n    },\n    {\n        \"product_title\": \"Organic homogeneous extranet Product 900\",\n        \"price\": \"2745.76\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 26\n    },\n    {\n        \"product_title\": \"Organic non-volatile service-desk Product 534\",\n        \"price\": \"8513.72\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 75\n    },\n    {\n        \"product_title\": \"Organic zero-defect extranet Product 405\",\n        \"price\": \"2057.11\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 24\n    },\n    {\n        \"product_title\": \"Organized context-sensitive open system Product 51\",\n        \"price\": \"3385.65\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 84\n    },\n    {\n        \"product_title\": \"Organized grid-enabled challenge Product 523\",\n        \"price\": \"7111.00\",\n        \"category_name\": \"Books\",\n        \"quantity\": 84\n    },\n    {\n        \"product_title\": \"Organized intermediate intranet Product 399\",\n        \"price\": \"2222.54\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 16\n    },\n    {\n        \"product_title\": \"Organized methodical definition Product 720\",\n        \"price\": \"7450.51\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 85\n    },\n    {\n        \"product_title\": \"Organized mission-critical moderator Product 504\",\n        \"price\": \"1208.92\",\n        \"category_name\": \"Books\",\n        \"quantity\": 14\n    },\n    {\n        \"product_title\": \"Organized motivating Graphic Interface Product 761\",\n        \"price\": \"7470.38\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 57\n    },\n    {\n        \"product_title\": \"Organized static artificial intelligence Product 696\",\n        \"price\": \"3598.99\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 50\n    },\n    {\n        \"product_title\": \"Persevering background infrastructure Product 875\",\n        \"price\": \"3600.64\",\n        \"category_name\": \"Books\",\n        \"quantity\": 9\n    },\n    {\n        \"product_title\": \"Persistent asynchronous forecast Product 248\",\n        \"price\": \"4736.11\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 3\n    },\n    {\n        \"product_title\": \"Phased asymmetric conglomeration Product 595\",\n        \"price\": \"5299.50\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 0\n    },\n    {\n        \"product_title\": \"Phased client-driven alliance Product 249\",\n        \"price\": \"3816.96\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 68\n    },\n    {\n        \"product_title\": \"Phased systematic product Product 250\",\n        \"price\": \"9530.58\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 79\n    },\n    {\n        \"product_title\": \"Phased system-worthy info-mediaries Product 967\",\n        \"price\": \"3324.81\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 3\n    },\n    {\n        \"product_title\": \"Polarized directional monitoring Product 973\",\n        \"price\": \"4733.50\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 89\n    },\n    {\n        \"product_title\": \"Polarized value-added Graphic Interface Product 904\",\n        \"price\": \"9348.37\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 7\n    },\n    {\n        \"product_title\": \"Pre-emptive explicit capacity Product 989\",\n        \"price\": \"4652.39\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 30\n    },\n    {\n        \"product_title\": \"Pre-emptive high-level superstructure Product 855\",\n        \"price\": \"3491.78\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 67\n    },\n    {\n        \"product_title\": \"Pre-emptive real-time process improvement Product 695\",\n        \"price\": \"7617.07\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 32\n    },\n    {\n        \"product_title\": \"Proactive grid-enabled ability Product 603\",\n        \"price\": \"4294.94\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 18\n    },\n    {\n        \"product_title\": \"Proactive intermediate secured line Product 233\",\n        \"price\": \"2338.68\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 91\n    },\n    {\n        \"product_title\": \"Proactive secondary access Product 804\",\n        \"price\": \"2430.29\",\n        \"category_name\": \"Books\",\n        \"quantity\": 5\n    },\n    {\n        \"product_title\": \"Profit-focused attitude-oriented budgetary management Product 417\",\n        \"price\": \"5566.99\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 89\n    },\n    {\n        \"product_title\": \"Profit-focused client-driven core Product 281\",\n        \"price\": \"1564.26\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 81\n    },\n    {\n        \"product_title\": \"Profit-focused real-time focus group Product 507\",\n        \"price\": \"6117.75\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 2\n    },\n    {\n        \"product_title\": \"Profound homogeneous throughput Product 378\",\n        \"price\": \"2786.87\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 55\n    },\n    {\n        \"product_title\": \"Programmable bandwidth-monitored workforce Product 716\",\n        \"price\": \"6501.12\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 15\n    },\n    {\n        \"product_title\": \"Programmable tertiary open system Product 219\",\n        \"price\": \"7807.38\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 38\n    },\n    {\n        \"product_title\": \"Progressive holistic budgetary management Product 911\",\n        \"price\": \"8858.88\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 91\n    },\n    {\n        \"product_title\": \"Progressive homogeneous support Product 277\",\n        \"price\": \"9660.95\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 43\n    },\n    {\n        \"product_title\": \"Public-key 6thgeneration challenge Product 200\",\n        \"price\": \"3727.63\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 62\n    },\n    {\n        \"product_title\": \"Public-key attitude-oriented frame Product 810\",\n        \"price\": \"1128.63\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 79\n    },\n    {\n        \"product_title\": \"Quality-focused content-based intranet Product 440\",\n        \"price\": \"5322.91\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 39\n    },\n    {\n        \"product_title\": \"Quality-focused context-sensitive knowledgebase Product 404\",\n        \"price\": \"2103.11\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 65\n    },\n    {\n        \"product_title\": \"Reactive background flexibility Product 498\",\n        \"price\": \"3936.88\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 90\n    },\n    {\n        \"product_title\": \"Reactive motivating definition Product 42\",\n        \"price\": \"6177.32\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 67\n    },\n    {\n        \"product_title\": \"Reactive responsive pricing structure Product 128\",\n        \"price\": \"4599.97\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 49\n    },\n    {\n        \"product_title\": \"Reactive stable architecture Product 551\",\n        \"price\": \"4598.10\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 88\n    },\n    {\n        \"product_title\": \"Reactive systematic adapter Product 492\",\n        \"price\": \"6095.43\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 46\n    },\n    {\n        \"product_title\": \"Reactive uniform moratorium Product 213\",\n        \"price\": \"1967.38\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 26\n    },\n    {\n        \"product_title\": \"Realigned executive access Product 612\",\n        \"price\": \"6420.70\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 19\n    },\n    {\n        \"product_title\": \"Realigned grid-enabled attitude Product 652\",\n        \"price\": \"5306.04\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 50\n    },\n    {\n        \"product_title\": \"Realigned real-time system engine Product 137\",\n        \"price\": \"4713.58\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 24\n    },\n    {\n        \"product_title\": \"Re-contextualized local Local Area Network Product 538\",\n        \"price\": \"4287.47\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 28\n    },\n    {\n        \"product_title\": \"Re-contextualized stable support Product 565\",\n        \"price\": \"2292.54\",\n        \"category_name\": \"Books\",\n        \"quantity\": 26\n    },\n    {\n        \"product_title\": \"Reduced bifurcated core Product 854\",\n        \"price\": \"2621.50\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 33\n    },\n    {\n        \"product_title\": \"Reduced human-resource application Product 784\",\n        \"price\": \"5981.30\",\n        \"category_name\": \"Books\",\n        \"quantity\": 77\n    },\n    {\n        \"product_title\": \"Reduced local functionalities Product 306\",\n        \"price\": \"6355.67\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 3\n    },\n    {\n        \"product_title\": \"Re-engineered analyzing model Product 241\",\n        \"price\": \"7859.61\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 2\n    },\n    {\n        \"product_title\": \"Re-engineered client-driven success Product 882\",\n        \"price\": \"5074.57\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 21\n    },\n    {\n        \"product_title\": \"Re-engineered encompassing database Product 170\",\n        \"price\": \"3262.77\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 81\n    },\n    {\n        \"product_title\": \"Re-engineered user-facing support Product 369\",\n        \"price\": \"9237.07\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 19\n    },\n    {\n        \"product_title\": \"Reverse-engineered dynamic adapter Product 288\",\n        \"price\": \"4431.23\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 39\n    },\n    {\n        \"product_title\": \"Reverse-engineered fault-tolerant conglomeration Product 588\",\n        \"price\": \"2666.53\",\n        \"category_name\": \"Books\",\n        \"quantity\": 59\n    },\n    {\n        \"product_title\": \"Reverse-engineered interactive instruction set Product 456\",\n        \"price\": \"8032.42\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 8\n    },\n    {\n        \"product_title\": \"Reverse-engineered methodical Internet solution Product 872\",\n        \"price\": \"3988.63\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 100\n    },\n    {\n        \"product_title\": \"Reverse-engineered radical challenge Product 714\",\n        \"price\": \"8002.78\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 9\n    },\n    {\n        \"product_title\": \"Reverse-engineered upward-trending contingency Product 356\",\n        \"price\": \"2383.12\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 76\n    },\n    {\n        \"product_title\": \"Right-sized attitude-oriented intranet Product 103\",\n        \"price\": \"4799.20\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 54\n    },\n    {\n        \"product_title\": \"Right-sized client-driven infrastructure Product 749\",\n        \"price\": \"7637.88\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 27\n    },\n    {\n        \"product_title\": \"Right-sized non-volatile projection Product 863\",\n        \"price\": \"6433.31\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 84\n    },\n    {\n        \"product_title\": \"Robust dynamic array Product 93\",\n        \"price\": \"8014.19\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 73\n    },\n    {\n        \"product_title\": \"Robust national success Product 934\",\n        \"price\": \"4802.99\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 11\n    },\n    {\n        \"product_title\": \"Seamless 4thgeneration encoding Product 296\",\n        \"price\": \"6240.58\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 75\n    },\n    {\n        \"product_title\": \"Seamless optimal knowledge user Product 906\",\n        \"price\": \"1647.20\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 71\n    },\n    {\n        \"product_title\": \"Secured 4thgeneration success Product 298\",\n        \"price\": \"9067.22\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 90\n    },\n    {\n        \"product_title\": \"Secured coherent model Product 883\",\n        \"price\": \"2373.67\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 77\n    },\n    {\n        \"product_title\": \"Secured incremental emulation Product 787\",\n        \"price\": \"4118.51\",\n        \"category_name\": \"Automotive\",\n        \"quantity\": 71\n    },\n    {\n        \"product_title\": \"Secured maximized customer loyalty Product 79\",\n        \"price\": \"8845.17\",\n        \"category_name\": \"Books\",\n        \"quantity\": 78\n    },\n    {\n        \"product_title\": \"Secured real-time hardware Product 593\",\n        \"price\": \"3680.72\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 61\n    },\n    {\n        \"product_title\": \"Secured value-added website Product 384\",\n        \"price\": \"7226.22\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 5\n    },\n    {\n        \"product_title\": \"Self-enabling coherent conglomeration Product 785\",\n        \"price\": \"4206.22\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 65\n    },\n    {\n        \"product_title\": \"Self-enabling impactful hierarchy Product 318\",\n        \"price\": \"5025.28\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 5\n    },\n    {\n        \"product_title\": \"Self-enabling tangible matrices Product 659\",\n        \"price\": \"1710.23\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 99\n    },\n    {\n        \"product_title\": \"Self-enabling tertiary Graphical User Interface Product 522\",\n        \"price\": \"1301.58\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 90\n    },\n    {\n        \"product_title\": \"Self-enabling transitional extranet Product 905\",\n        \"price\": \"8664.09\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 98\n    },\n    {\n        \"product_title\": \"Self-enabling uniform support Product 611\",\n        \"price\": \"7481.77\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 13\n    },\n    {\n        \"product_title\": \"Sharable actuating throughput Product 819\",\n        \"price\": \"2687.78\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 100\n    },\n    {\n        \"product_title\": \"Sharable fresh-thinking solution Product 878\",\n        \"price\": \"2640.37\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 89\n    },\n    {\n        \"product_title\": \"Sharable next generation encryption Product 285\",\n        \"price\": \"7549.13\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 51\n    },\n    {\n        \"product_title\": \"Stand-alone 3rdgeneration capability Product 496\",\n        \"price\": \"4654.41\",\n        \"category_name\": \"Garden\",\n        \"quantity\": 16\n    },\n    {\n        \"product_title\": \"Stand-alone client-server info-mediaries Product 222\",\n        \"price\": \"4946.96\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 28\n    },\n    {\n        \"product_title\": \"Stand-alone dedicated functionalities Product 931\",\n        \"price\": \"8213.37\",\n        \"category_name\": \"Books\",\n        \"quantity\": 48\n    },\n    {\n        \"product_title\": \"Stand-alone grid-enabled function Product 193\",\n        \"price\": \"4559.88\",\n        \"category_name\": \"Grocery\",\n        \"quantity\": 42\n    },\n    {\n        \"product_title\": \"Streamlined didactic flexibility Product 890\",\n        \"price\": \"7966.10\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 37\n    },\n    {\n        \"product_title\": \"Streamlined maximized adapter Product 801\",\n        \"price\": \"9685.90\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 51\n    },\n    {\n        \"product_title\": \"Streamlined optimizing moderator Product 90\",\n        \"price\": \"3226.99\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 27\n    },\n    {\n        \"product_title\": \"Streamlined value-added capacity Product 843\",\n        \"price\": \"4976.65\",\n        \"category_name\": \"Home & Kitchen\",\n        \"quantity\": 97\n    },\n    {\n        \"product_title\": \"Switchable content-based contingency Product 862\",\n        \"price\": \"3354.83\",\n        \"category_name\": \"Automotive\",\n        \"quantity\": 31\n    },\n    {\n        \"product_title\": \"Switchable discrete help-desk Product 71\",\n        \"price\": \"4001.23\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 97\n    },\n    {\n        \"product_title\": \"Switchable fault-tolerant encoding Product 198\",\n        \"price\": \"6236.86\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 58\n    },\n    {\n        \"product_title\": \"Synchronized attitude-oriented data-warehouse Product 712\",\n        \"price\": \"7638.17\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 27\n    },\n    {\n        \"product_title\": \"Synergistic maximized extranet Product 653\",\n        \"price\": \"6290.88\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 93\n    },\n    {\n        \"product_title\": \"Synergistic mobile function Product 99\",\n        \"price\": \"5575.98\",\n        \"category_name\": \"Pet Supplies\",\n        \"quantity\": 95\n    },\n    {\n        \"product_title\": \"Synergistic user-facing focus group Product 950\",\n        \"price\": \"5248.86\",\n        \"category_name\": \"Automotive\",\n        \"quantity\": 91\n    },\n    {\n        \"product_title\": \"Team-oriented 3rdgeneration help-desk Product 525\",\n        \"price\": \"7713.09\",\n        \"category_name\": \"Beauty\",\n        \"quantity\": 99\n    },\n    {\n        \"product_title\": \"Team-oriented discrete installation Product 962\",\n        \"price\": \"3975.15\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 22\n    },\n    {\n        \"product_title\": \"Total coherent methodology Product 299\",\n        \"price\": \"2031.19\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 80\n    },\n    {\n        \"product_title\": \"Total eco-centric architecture Product 229\",\n        \"price\": \"5140.22\",\n        \"category_name\": \"Books\",\n        \"quantity\": 54\n    },\n    {\n        \"product_title\": \"Triple-buffered multimedia definition Product 341\",\n        \"price\": \"9011.24\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 33\n    },\n    {\n        \"product_title\": \"Triple-buffered needs-based solution Product 351\",\n        \"price\": \"3392.74\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 28\n    },\n    {\n        \"product_title\": \"Triple-buffered uniform standardization Product 403\",\n        \"price\": \"6915.24\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 56\n    },\n    {\n        \"product_title\": \"Triple-buffered zero-defect application Product 949\",\n        \"price\": \"8382.94\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 26\n    },\n    {\n        \"product_title\": \"Universal client-server hardware Product 519\",\n        \"price\": \"8417.88\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 32\n    },\n    {\n        \"product_title\": \"Universal tangible knowledge user Product 661\",\n        \"price\": \"5862.28\",\n        \"category_name\": \"Books\",\n        \"quantity\": 17\n    },\n    {\n        \"product_title\": \"Upgradable coherent knowledge user Product 347\",\n        \"price\": \"5697.51\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 33\n    },\n    {\n        \"product_title\": \"Upgradable full-range product Product 467\",\n        \"price\": \"5153.08\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 4\n    },\n    {\n        \"product_title\": \"Upgradable intangible paradigm Product 365\",\n        \"price\": \"8997.67\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 40\n    },\n    {\n        \"product_title\": \"Upgradable systematic analyzer Product 623\",\n        \"price\": \"2998.34\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 91\n    },\n    {\n        \"product_title\": \"Up-sized actuating ability Product 162\",\n        \"price\": \"9777.38\",\n        \"category_name\": \"Furniture\",\n        \"quantity\": 55\n    },\n    {\n        \"product_title\": \"Up-sized client-driven hardware Product 957\",\n        \"price\": \"5400.99\",\n        \"category_name\": \"Toys\",\n        \"quantity\": 85\n    },\n    {\n        \"product_title\": \"User-centric directional leverage Product 305\",\n        \"price\": \"4175.37\",\n        \"category_name\": \"Footwear\",\n        \"quantity\": 79\n    },\n    {\n        \"product_title\": \"User-centric human-resource throughput Product 226\",\n        \"price\": \"9314.90\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 32\n    },\n    {\n        \"product_title\": \"User-centric local software Product 438\",\n        \"price\": \"2083.46\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 15\n    },\n    {\n        \"product_title\": \"User-centric real-time time-frame Product 59\",\n        \"price\": \"5702.47\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 37\n    },\n    {\n        \"product_title\": \"Versatile contextually-based knowledge user Product 896\",\n        \"price\": \"8685.59\",\n        \"category_name\": \"Automotive\",\n        \"quantity\": 2\n    },\n    {\n        \"product_title\": \"Versatile explicit synergy Product 644\",\n        \"price\": \"6219.08\",\n        \"category_name\": \"Sports\",\n        \"quantity\": 15\n    },\n    {\n        \"product_title\": \"Virtual contextually-based paradigm Product 495\",\n        \"price\": \"4868.80\",\n        \"category_name\": \"Stationery\",\n        \"quantity\": 49\n    },\n    {\n        \"product_title\": \"Virtual global knowledgebase Product 315\",\n        \"price\": \"7197.36\",\n        \"category_name\": \"Electronics\",\n        \"quantity\": 56\n    },\n    {\n        \"product_title\": \"Virtual holistic knowledge user Product 486\",\n        \"price\": \"3841.76\",\n        \"category_name\": \"Books\",\n        \"quantity\": 45\n    },\n    {\n        \"product_title\": \"Virtual homogeneous service-desk Product 824\",\n        \"price\": \"6743.95\",\n        \"category_name\": \"Books\",\n        \"quantity\": 56\n    },\n    {\n        \"product_title\": \"Visionary local portal Product 795\",\n        \"price\": \"2181.44\",\n        \"category_name\": \"Clothing\",\n        \"quantity\": 90\n    },\n    {\n        \"product_title\": \"Visionary object-oriented model Product 251\",\n        \"price\": \"1830.39\",\n        \"category_name\": \"Jewelry\",\n        \"quantity\": 68\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "Search Products",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "Search Products Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8001/api/search/products/?q=Adaptive&category=Electronics&min_price=100&max_price=100000&store_id=1&in_stock=true&sort=price&page=1&page_size=10",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8001",
+              "path": [
+                "api",
+                "search",
+                "products",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "Adaptive",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "Electronics",
+                  "type": "text"
+                },
+                {
+                  "key": "min_price",
+                  "value": "100",
+                  "type": "text"
+                },
+                {
+                  "key": "max_price",
+                  "value": "100000",
+                  "type": "text"
+                },
+                {
+                  "key": "store_id",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "in_stock",
+                  "value": "true",
+                  "type": "text"
+                },
+                {
+                  "key": "sort",
+                  "value": "price",
+                  "type": "text"
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "page_size",
+                  "value": "10",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 26 Aug 2026 14:14:28 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.10.21"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept, Cookie"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, HEAD, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "730"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"count\": 2,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 6,\n            \"title\": \"Adaptive value-added productivity Product 6\",\n            \"description\": \"Help most work house. Sign much receive administration.\\nMeeting summer anyone gas soon research. Finish age understand edge rather after star. Those ground store.\",\n            \"price\": \"1427.72\",\n            \"category_name\": \"Electronics\",\n            \"created_at\": \"2026-08-26T13:24:23.233397Z\",\n            \"inventory_quantity\": 91\n        },\n        {\n            \"id\": 954,\n            \"title\": \"Adaptive attitude-oriented toolset Product 954\",\n            \"description\": \"Produce career customer their six only though. Good pretty scientist create. Interview car administration enough account.\",\n            \"price\": \"3945.93\",\n            \"category_name\": \"Electronics\",\n            \"created_at\": \"2026-08-26T13:24:23.381263Z\",\n            \"inventory_quantity\": 74\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Product Autocomplete",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "Product Autocomplete Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8001/api/search/suggest/?q=adap",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8001",
+              "path": [
+                "api",
+                "search",
+                "suggest",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "adap",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 26 Aug 2026 14:16:07 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.10.21"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept, Cookie"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, HEAD, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "459"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"results\": [\n        \"Adaptive 3rdgeneration data-warehouse Product 122\",\n        \"Adaptive 3rdgeneration emulation Product 477\",\n        \"Adaptive 3rdgeneration model Product 550\",\n        \"Adaptive asymmetric circuit Product 427\",\n        \"Adaptive attitude-oriented toolset Product 954\",\n        \"Adaptive didactic moratorium Product 254\",\n        \"Adaptive heuristic emulation Product 335\",\n        \"Adaptive hybrid structure Product 737\",\n        \"Adaptive needs-based forecast Product 387\",\n        \"Adaptive systematic solution Product 781\"\n    ]\n}"
+        }
+      ]
+    }
+  ]
+}
