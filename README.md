@@ -941,31 +941,6 @@ http://127.0.0.1:8001/api/schema/
 
 ---
 
-# Submission Checklist
-
-Before submitting the repository, verify that it contains:
-
-- [x] Complete Django project
-- [x] Models
-- [x] Serializers
-- [x] API views
-- [x] URLs
-- [x] Seed data command
-- [x] Redis caching
-- [x] Celery task integration
-- [x] Dockerfile
-- [x] Docker Compose configuration
-- [x] Automated tests
-- [x] Swagger / OpenAPI documentation
-- [x] Postman collection
-- [x] README with setup instructions
-- [x] Sample API requests
-- [x] Caching explanation
-- [x] Async/Celery explanation
-- [x] Scalability considerations
-
----
-
 # Author
 
 Vaishnavi Uttarkar
