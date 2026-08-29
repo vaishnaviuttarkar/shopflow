@@ -10,7 +10,8 @@ from .models import Order, OrderItem
 from .serializers import (
     OrderCreateSerializer,
     OrderSerializer,
-    OrderListSerializer
+    OrderListSerializer,
+    OrderItemSerializer
 )
 
 from django.db.models import Count
@@ -25,10 +26,16 @@ class OrderCreateView(APIView):
             data=request.data
         )
 
+        # pserializer = OrderItemSerializer(
+        #     pdata=request.data
+        # )
+
         serializer.is_valid(raise_exception=True)
+        # pserializer.is_valid(raise_exception=True)
 
         store_id = serializer.validated_data["store_id"]
         items = serializer.validated_data["items"]
+        # product_title = pserializer.validated_data["product_title"]
 
         with transaction.atomic():
 
@@ -54,6 +61,13 @@ class OrderCreateView(APIView):
                 for inventory in inventories
             }
 
+            # products = Product.objects.filter(id__in=product_ids)
+
+            # product_map = {
+            #     product.id: product
+            #     for product in products
+            # }
+
             insufficient_stock = []
 
             for item in items:
@@ -62,16 +76,19 @@ class OrderCreateView(APIView):
                 requested = item["quantity_requested"]
 
                 inventory = inventory_map.get(product_id)
+                # product = product_map.get(product_id)
 
                 if inventory is None:
                     insufficient_stock.append({
                         "product_id": product_id,
+                        # "product_title": product.title if product else "Unknown product",
                         "reason": "Product not available at this store.",
                     })
 
                 elif inventory.quantity < requested:
                     insufficient_stock.append({
                         "product_id": product_id,
+                        # "product_title": product.title,
                         "reason": "Insufficient stock.",
                         "available": inventory.quantity,
                         "requested": requested,
@@ -91,10 +108,14 @@ class OrderCreateView(APIView):
                         quantity_requested=item["quantity_requested"],
                     )
 
+                ptitle = inventory.product.title
+                msg = f"{ptitle} is not available"
+
                 return Response(
                     {
                         "order": OrderSerializer(order).data,
                         "errors": insufficient_stock,
+                        "message": msg
                     },
                     status=status.HTTP_201_CREATED,
                 )
